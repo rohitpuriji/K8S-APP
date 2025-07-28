@@ -23,13 +23,8 @@ spec:
                 configMapKeyRef:
                   name: db-config
                   key: host
-            - name: DB_USER
+            - name: DB_PORT
               valueFrom:
                 configMapKeyRef:
                   name: db-config
-                  key: user
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: db-secret
-                  key: password
+                  key: port
