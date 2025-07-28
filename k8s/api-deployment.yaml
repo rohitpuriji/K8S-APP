@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: node-api
-          image: 7310642410/usre-api:latest
+          image: 7310642410/user-api:latest
           ports:
             - containerPort: 3000
           env:
