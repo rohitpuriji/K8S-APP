@@ -1,9 +1,26 @@
 const express = require("express");
+const { MongoClient } = require("mongodb");
+
 const app = express();
-const recordsRoute = require("./routes/records");
+const port = 3000;
 
-app.use(express.json());
-app.use("/records", recordsRoute);
+const dbHost = process.env.DB_HOST || "localhost";
+const dbPort = process.env.DB_PORT || "27017";
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`API running on port ${PORT}`));
+const url = `mongodb://${dbHost}:${dbPort}`;
+
+app.get("/", async (req, res) => {
+  try {
+    const client = await MongoClient.connect(url);
+    const db = client.db("test");
+    const result = await db.collection("sample").find().toArray();
+    res.json(result);
+    client.close();
+  } catch (err) {
+    res.status(500).send("Database connection error: " + err.message);
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
