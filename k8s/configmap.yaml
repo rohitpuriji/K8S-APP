@@ -3,6 +3,5 @@ kind: ConfigMap
 metadata:
   name: db-config
 data:
-  DB_HOST: postgres
-  DB_USER: postgres
-  DB_NAME: mydb
+  host: db-service
+  user: testuser

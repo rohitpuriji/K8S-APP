@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: node-api-service
 spec:
+  type: LoadBalancer
   selector:
     app: node-api
   ports:
