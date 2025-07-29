@@ -6,8 +6,9 @@ const port = 3000;
 
 const dbHost = process.env.DB_HOST || "localhost";
 const dbPort = process.env.DB_PORT || "27017";
-const dbUser = process.env.DB_USER || "admin";
-const dbPass = process.env.DB_PASS || "admin123";
+const dbUser = process.env.MONGO_INITDB_ROOT_USERNAME || "admin";
+const dbPass = process.env.MONGO_INITDB_ROOT_PASSWORD || "admin123";
+
 const dbName = "UsersDatabase";
 
 const url = `mongodb://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}?authSource=admin`;
