@@ -9,11 +9,36 @@ const dbPort = process.env.DB_PORT || "27017";
 
 const url = `mongodb://${dbHost}:${dbPort}`;
 
+// Seed data on app startup
+async function seedData() {
+  const client = await MongoClient.connect(url);
+  const db = client.db("UsersDatabase");
+  const collection = db.collection("users");
+
+  const count = await collection.countDocuments();
+  if (count === 0) {
+    await collection.insertMany([
+      { name: "Rohit", age: 25 },
+      { name: "Mohit", age: 30 },
+      { name: "Aman", age: 28 },
+      { name: "Rohan", age: 32 },
+      { name: "Yash", age: 27 },
+    ]);
+    console.log("Sample data inserted.");
+  } else {
+    console.log("Data already exists. Skipping seeding.");
+  }
+
+  await client.close();
+}
+
+seedData();
+
 app.get("/", async (req, res) => {
   try {
     const client = await MongoClient.connect(url);
-    const db = client.db("test");
-    const result = await db.collection("sample").find().toArray();
+    const db = client.db("UsersDatabase");
+    const result = await db.collection("users").find().toArray();
     res.json(result);
     client.close();
   } catch (err) {
