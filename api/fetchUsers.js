@@ -2,7 +2,7 @@
 
 const axios = require("axios");
 
-const exposedUrl = "http://34.171.254.207/";
+const exposedUrl = "http://34.133.61.14/";
 
 axios
   .get(exposedUrl)
@@ -11,5 +11,5 @@ axios
     console.log(response.data);
   })
   .catch((error) => {
-    console.error("❌ Error fetching users:", error.message);
+    console.error("Error fetching users:", error.message);
   });
